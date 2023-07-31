@@ -1,0 +1,17 @@
+{
+  "name": "ieltscardsmetadatagenerator",
+  "version": "1.0.0",
+  "description": "A tool of generating anki cards meta-data for IELTS words.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node main.js"
+  },
+  "keywords": [],
+  "author": "Quasimurdock",
+  "license": "ISC",
+  "dependencies": {
+    "bent": "^7.3.12",
+    "cheerio": "1.0.0-rc.12"
+  }
+}
