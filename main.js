@@ -10,6 +10,16 @@ const filePath = `${directoryPath}/words.txt`;
 const urlString =
   "https://dictionary.cambridge.org/dictionary/english-chinese-simplified";
 
+function checkDuplicateFiles(directory, filename) {
+  const files = fs.readdirSync(directory); // read all files under the directory
+  for (let file of files) {
+    if (file === filename) {
+      return true; // duplicated files existed
+    }
+  }
+  return false;
+}
+
 // read file and process the token of each line
 fs.readFile(filePath, "utf8", async (err, data) => {
   if (err) {
@@ -22,7 +32,13 @@ fs.readFile(filePath, "utf8", async (err, data) => {
     word = word.trim();
     // judge if empty
     if (word === "" || word.length == 0) {
-      return;
+      continue;
+    }
+
+    // check if duplicated file exists
+    if (checkDuplicateFiles("./output", word + ".html")) {
+      console.log(`[SKIP] Duplicated [${word}] file exists.`);
+      continue;
     }
     // concat strings
     try {
@@ -36,7 +52,7 @@ fs.readFile(filePath, "utf8", async (err, data) => {
       $(".hfr.lpb-2").remove();
       $("i.i-plus.ca_hi").remove();
       $("script").remove();
-      // remove all dictionary href links from <a> nodes with 
+      // remove all dictionary href links from <a> nodes with
       // and underlines of its <span> sub nodes
       $("a[href*='dictionary'] span").removeClass("dx-h");
       $("a[href*='dictionary']").removeAttr("href");
@@ -55,6 +71,17 @@ fs.readFile(filePath, "utf8", async (err, data) => {
       const fetchUrl = urlString + "/" + word;
       console.error(`[ERR] While finding ${word}：`, fetchUrl);
       console.error(error);
+      fs.appendFile(
+        `${directoryPath}/output/log/missing_words.txt`,
+        word + "\n",
+        (err) => {
+          if (err) {
+            console.log(`[LOG-ERR] While logging missing of [${word}]:`, err);
+          } else {
+            console.log(`[LOG-OK] Missing of word [${word}] is logged.`);
+          }
+        }
+      );
     }
   }
 });
