@@ -36,7 +36,7 @@ fs.readFile(filePath, "utf8", async (err, data) => {
     }
 
     // check if duplicated file exists
-    if (checkDuplicateFiles("./output", word + ".html")) {
+    if (checkDuplicateFiles("./output/html", word + ".html")) {
       console.log(`[SKIP] Duplicated [${word}] file exists.`);
       continue;
     }
