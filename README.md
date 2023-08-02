@@ -2,7 +2,7 @@
 
 ## Intro
 
-It's a dictionary words meta-data fetching script for generating IELTS **anki cards**.
+It's a simple online dictionary words fetching project for generating IELTS **anki cards**. It contains two main script `main.js` for fetching html and `html2notes.js` for convert html to notes in anki.
 
 All words in `words.txt` comes from the [IELTS](https://github.com/Quasimurdock/IELTS) repo.
 
@@ -13,7 +13,7 @@ All words in `words.txt` comes from the [IELTS](https://github.com/Quasimurdock/
 If u just wanna use the note cards of IELTS words, follow the steps below:
 
 1. Find the release package in the **right nav bar** of this page and download it.
-2. Import the `.apkg` file inside of that package to Anki.
+2. Import the `.apkg` file inside that package to Anki.
 
 ### Develop
 
