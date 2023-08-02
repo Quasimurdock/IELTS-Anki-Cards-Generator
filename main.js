@@ -60,7 +60,7 @@ fs.readFile(filePath, "utf8", async (err, data) => {
         `<html><head><link rel="stylesheet" href="common.css"></head>` +
         $(".entry-body").html() +
         `</html>`;
-      fs.writeFile(`${directoryPath}/output/${word}.html`, target, (err) => {
+      fs.writeFile(`${directoryPath}/output/html/${word}.html`, target, (err) => {
         if (err) {
           console.log(`[ERR] While writing [${word}]:`, err);
         } else {
