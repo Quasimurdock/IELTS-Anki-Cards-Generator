@@ -6,6 +6,24 @@ It's a dictionary words meta-data fetching script for generating IELTS **anki ca
 
 All words in `words.txt` comes from the [IELTS](https://github.com/Quasimurdock/IELTS) repo.
 
+## How to use
+
+### Simply import
+
+If u just wanna use the note cards of IELTS words, follow the steps below:
+
+1. Find the release package in the **right nav bar** of this page and download it.
+2. Import the `.apkg` file inside of that package to Anki.
+
+### Develop
+
+1. Install `npm` or `pnpm`.
+2. `npm install` or `pnpm install` to pull all dependencies.
+3. `pnpm start` to generate html files from Cam dict.
+4. Open ur Anki program.
+4. Install the Anki plugin [AnkiConnect](https://ankiweb.net/shared/info/2055492159).
+5. `pnpm note` to convert html files to notes in your Anki.
+
 ## Template
 
 Check the `HTML` files under `output` directory once generation process completed.
