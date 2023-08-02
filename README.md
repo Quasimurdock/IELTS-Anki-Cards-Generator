@@ -6,6 +6,14 @@ It's a simple online dictionary words fetching project for generating IELTS **an
 
 All words in `words.txt` comes from the [IELTS](https://github.com/Quasimurdock/IELTS) repo.
 
+## Sample
+
+### Front side
+![front](./img/front.jpg)
+
+### Back side
+![back](./img/back.jpg)
+
 ## How to use
 
 ### Simply import
@@ -33,3 +41,6 @@ Check the `HTML` files under `output` directory once generation process complete
 The dictionary data used in this project is sourced from a publicly available online dictionary. All data obtained has been used solely for non-profit personal or educational purposes and is intended for reference and learning purposes only. I do not claim ownership of the data nor do I guarantee its accuracy or completeness.
 
 **This project is not intended for commercial use, and I will not be held responsible for any infringement of commercial rights that may arise from the use of this data.** Users of this project are solely responsible for their own use of the data and should ensure that they comply with all applicable laws and regulations.
+
+## Contact
+If u have any questions, just open an issue of this repo or simply mail to my [outlook](mailto:sh1wnt@outlook.com). And... Don't forget to leave a star if u like it.
