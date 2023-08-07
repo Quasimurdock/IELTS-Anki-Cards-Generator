@@ -2,7 +2,7 @@
 
 ## Intro
 
-It's a simple online dictionary words fetching project for generating IELTS **anki cards**. It contains two main script `main.js` for fetching html and `html2notes.js` for convert html to notes in anki.
+It's a simple online dictionary words fetching project for generating IELTS **anki cards**. It contains two main script `main.js` for fetching html and `html2notes.js` for converting html to notes in anki.
 
 All words in `words.txt` comes from the [IELTS](https://github.com/Quasimurdock/IELTS) repo.
 
