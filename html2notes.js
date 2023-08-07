@@ -11,10 +11,41 @@ const DEFAULT_DECK_NAME = "IELTS-CamDict-Words";
 // add anki notes
 async function addNotes(notes) {
   try {
+    if (notes == null) throw new Error("addNotes() got a null input of notes");
+    const wordsListForIndexing = notes.map((v) => v.fields.Word);
+    // console.log(`wordsListForIndexing: `, wordsListForIndexing);
     const result = await invoke("addNotes", 6, { notes: notes });
+    // console.log(`addNotes() result: `, result);
+    if (result === null) {
+      throw new Error("addNotes() returned null");
+    }
+    if (result.length == 0) {
+      throw new Error("addNotes() returned an empry result");
+    } else {
+      // console.log(result);
+      const failureWordsIndexList = result
+        .map((id, i) => {
+          console.log(id);
+          if (id === null) return i;
+          else return -1;
+        })
+        .filter((id) => id !== -1);
+      // console.log(`failureWordsIndexList: ${failureWordsIndexList}`);
+      if (failureWordsIndexList.length != 0) {
+        const failureWordsList = failureWordsIndexList.map(
+          (index) => wordsListForIndexing[index]
+        );
+        throw new Error(
+          "some words(" +
+            failureWordsIndexList.length +
+            ") failed to add: [" +
+            failureWordsList.join(", ") +
+            "]"
+        );
+      }
+    }
     return result;
   } catch (error) {
-    console.log("[ERR] While adding notes:" + error);
     writeToLog("[ERR] While adding notes:" + error);
   }
 }
@@ -22,7 +53,6 @@ let notesList = [];
 async function processHtmlFiles() {
   fs.readdir(HTML_DIR, (err, files) => {
     if (err) {
-      console.error(err);
       writeToLog(err.message);
       return;
     }
@@ -31,7 +61,6 @@ async function processHtmlFiles() {
         const filePath = path.join(HTML_DIR, file);
         fs.readFile(filePath, "utf8", (err, data) => {
           if (err) {
-            console.error(err);
             writeToLog(err.message);
             return;
           }
@@ -71,7 +100,6 @@ async function processHtmlFiles() {
             }
             console.log(`Current word: [${file.match(/^(.+)\.html$/)[1]}]`);
           } catch (err) {
-            console.error(`Error processing ${file}:`, err);
             writeToLog(`[ERR] Error processing ${file}: ${err.message}`);
           }
         });
@@ -81,6 +109,7 @@ async function processHtmlFiles() {
 }
 
 function writeToLog(message) {
+  console.log(message);
   const logMessage = `[${new Date().toLocaleString()}] ${message}\n`;
   fs.appendFile("./output/log/" + LOG_FILE, logMessage, (err) => {
     if (err) {
@@ -94,13 +123,12 @@ async function createNewDeck() {
   if (result.indexOf(DEFAULT_DECK_NAME) == -1) {
     try {
       await invoke("createDeck", 6, { deck: DEFAULT_DECK_NAME });
-      console.log("[OK] Created a new deck for cards.\n");
+      writeToLog("[OK] Created a new deck for cards.\n");
     } catch (error) {
-      console.log("[ERR] While creating a new deck:" + error);
       writeToLog(`[ERR] While creating a new deck:: ${err.message}`);
     }
   }
-  console.log(`Got list of current decks: ${result}`);
+  writeToLog(`[INF] Got list of current decks: ${result}`);
 }
 
 createNewDeck();
