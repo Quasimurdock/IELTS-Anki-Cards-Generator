@@ -30,9 +30,7 @@ If u just wanna use the note cards of IELTS words, follow the steps below:
 3. `pnpm start` to generate html files from Cam dict.
 4. Open ur Anki program.
 4. Install the Anki plugin [AnkiConnect](https://ankiweb.net/shared/info/2055492159).
-5. Checkout the [issue#2](https://github.com/Quasimurdock/IELTS-Anki-Cards-Generator/issues/2#issuecomment-1666818015) and follow the steps to create a new note type named `BasicCamCard`.
-6. Copy the contents of `output/html/common.css` to the note type styling setting.
-7. `pnpm note` to convert html files to notes in your Anki.
+5. `pnpm note` to convert html files to notes in your Anki.
 
 ## Template
 
