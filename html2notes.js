@@ -28,7 +28,7 @@ async function addNotes(notes) {
     } else {
       results.forEach((result, i) => {
         if (result.error) {
-          console.error("addNotes() error : ", JSON.stringify(result));
+          console.error("addNotes() error: ", JSON.stringify(result));
           throw new Error(`word failed to add: ${notes[i].fields.Word}`);
         }
       });  
