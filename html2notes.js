@@ -12,39 +12,28 @@ const DEFAULT_DECK_NAME = "IELTS-CamDict-Words";
 async function addNotes(notes) {
   try {
     if (notes == null) throw new Error("addNotes() got a null input of notes");
-    const wordsListForIndexing = notes.map((v) => v.fields.Word);
-    // console.log(`wordsListForIndexing: `, wordsListForIndexing);
-    const result = await invoke("addNotes", 6, { notes: notes });
-    // console.log(`addNotes() result: `, result);
-    if (result === null) {
+
+    const multiParamsActions = notes.map((note) => ({
+      action: "addNote",
+      version: 6,
+      params: { note },
+    }));
+    const results = await invoke("multi", 6, { actions: multiParamsActions });
+
+    if (results === null) {
       throw new Error("addNotes() returned null");
     }
-    if (result.length == 0) {
+    if (results.length == 0) {
       throw new Error("addNotes() returned an empry result");
     } else {
-      // console.log(result);
-      const failureWordsIndexList = result
-        .map((id, i) => {
-          console.log(id);
-          if (id === null) return i;
-          else return -1;
-        })
-        .filter((id) => id !== -1);
-      // console.log(`failureWordsIndexList: ${failureWordsIndexList}`);
-      if (failureWordsIndexList.length != 0) {
-        const failureWordsList = failureWordsIndexList.map(
-          (index) => wordsListForIndexing[index]
-        );
-        throw new Error(
-          "some words(" +
-            failureWordsIndexList.length +
-            ") failed to add: [" +
-            failureWordsList.join(", ") +
-            "]"
-        );
-      }
+      results.forEach((result, i) => {
+        if (result.error) {
+          console.error("addNotes() error: ", JSON.stringify(result));
+          throw new Error(`word failed to add: ${notes[i].fields.Word}`);
+        }
+      });  
     }
-    return result;
+    return results;
   } catch (error) {
     writeToLog("[ERR] While adding notes:" + error);
   }
