@@ -3,10 +3,10 @@ const path = require("path");
 const cheerio = require("cheerio");
 const invoke = require("./utils/anki_connector");
 const Note = require("./models/notecard");
+const writeToLog = require("./utils/logger");
 
 const directoryPath = __dirname;
 const HTML_DIR = directoryPath + "/output/html/";
-const LOG_FILE = "log_html2notes.txt";
 const DEFAULT_DECK_NAME = "IELTS-CamDict-Words2";
 const DEFAULT_NOTE_TYPE_NAME = "BasicCamCard2";
 const DEFAULT_CSS_FILENAME = "common.css";
@@ -106,16 +106,6 @@ async function processHtmlFiles() {
         });
       }
     });
-  });
-}
-
-function writeToLog(message) {
-  console.log(message);
-  const logMessage = `[${new Date().toLocaleString()}] ${message}\n`;
-  fs.appendFile(directoryPath+"/output/log/" + LOG_FILE, logMessage, (err) => {
-    if (err) {
-      console.error("[LOG-ERR] Failed to write to log file:", err);
-    }
   });
 }
 
