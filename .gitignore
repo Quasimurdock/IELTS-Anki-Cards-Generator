@@ -1,2 +1,3 @@
 node_modules/
 src/output/html/*.html
+src/output/log/
