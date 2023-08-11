@@ -1,13 +1,14 @@
 const fs = require("fs");
 const path = require("path");
 const cheerio = require("cheerio");
-const invoke = require("./anki_connector");
-const Note = require("./notecard");
+const invoke = require("./utils/anki_connector");
+const Note = require("./models/notecard");
 
-const HTML_DIR = "./output/html/";
+const directoryPath = __dirname;
+const HTML_DIR = directoryPath + "/output/html/";
 const LOG_FILE = "log_html2notes.txt";
-const DEFAULT_DECK_NAME = "IELTS-CamDict-Words";
-const DEFAULT_NOTE_TYPE_NAME = "BasicCamCard";
+const DEFAULT_DECK_NAME = "IELTS-CamDict-Words2";
+const DEFAULT_NOTE_TYPE_NAME = "BasicCamCard2";
 const DEFAULT_CSS_FILENAME = "common.css";
 
 // add anki notes
@@ -33,7 +34,7 @@ async function addNotes(notes) {
           console.error("addNotes() error: ", JSON.stringify(result));
           throw new Error(`word failed to add: ${notes[i].fields.Word}`);
         }
-      });  
+      });
     }
     return results;
   } catch (error) {
@@ -111,7 +112,7 @@ async function processHtmlFiles() {
 function writeToLog(message) {
   console.log(message);
   const logMessage = `[${new Date().toLocaleString()}] ${message}\n`;
-  fs.appendFile("./output/log/" + LOG_FILE, logMessage, (err) => {
+  fs.appendFile(directoryPath+"/output/log/" + LOG_FILE, logMessage, (err) => {
     if (err) {
       console.error("[LOG-ERR] Failed to write to log file:", err);
     }

@@ -1,10 +1,11 @@
 const fs = require("fs");
 const bent = require("bent");
 const cheerio = require("cheerio");
+const path = require("path");
 
 // define directory path and file path
-const directoryPath = ".";
-const filePath = `${directoryPath}/words.txt`;
+const directoryPath = __dirname;
+const filePath = path.join(__dirname, "words.txt");
 
 // define URL prefix
 const urlString =
@@ -36,7 +37,7 @@ fs.readFile(filePath, "utf8", async (err, data) => {
     }
 
     // check if duplicated file exists
-    if (checkDuplicateFiles("./output/html", word + ".html")) {
+    if (checkDuplicateFiles(directoryPath + "/output/html", word + ".html")) {
       console.log(`[SKIP] Duplicated [${word}] file exists.`);
       continue;
     }
@@ -60,13 +61,17 @@ fs.readFile(filePath, "utf8", async (err, data) => {
         `<html><head><link rel="stylesheet" href="common.css"></head>` +
         $(".entry-body").html() +
         `</html>`;
-      fs.writeFile(`${directoryPath}/output/html/${word}.html`, target, (err) => {
-        if (err) {
-          console.log(`[ERR] While writing [${word}]:`, err);
-        } else {
-          console.log(`[OK] Word [${word}] is written.`);
+      fs.writeFile(
+        `${directoryPath}/output/html/${word}.html`,
+        target,
+        (err) => {
+          if (err) {
+            console.log(`[ERR] While writing [${word}]:`, err);
+          } else {
+            console.log(`[OK] Word [${word}] is written.`);
+          }
         }
-      });
+      );
     } catch (error) {
       const fetchUrl = urlString + "/" + word;
       console.error(`[ERR] While finding ${word}：`, fetchUrl);

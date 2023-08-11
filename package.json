@@ -2,11 +2,11 @@
   "name": "ieltscardsmetadatagenerator",
   "version": "1.0.0",
   "description": "A tool of generating anki cards meta-data for IELTS words.",
-  "main": "main.js",
+  "main": "src/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node main.js",
-    "note": "node html2notes.js"
+    "start": "node src/main.js",
+    "note": "node src/html2notes.js"
   },
   "keywords": [
     "IELTS",
