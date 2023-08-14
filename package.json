@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/main.js",
-    "note": "node src/html2notes.js"
+    "note": "node src/html2notes.js",
+    "note-mkanki": "node src/mkanki.js"
   },
   "keywords": [
     "IELTS",
@@ -21,6 +22,7 @@
   "license": "ISC",
   "dependencies": {
     "bent": "^7.3.12",
-    "cheerio": "1.0.0-rc.12"
+    "cheerio": "1.0.0-rc.12",
+    "mkanki": "github:Serifold/mkanki"
   }
 }
