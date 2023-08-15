@@ -9,6 +9,7 @@ const HTML_DIR = directoryPath + "/output/html/";
 const DEFAULT_DECK_NAME = "IELTS-CamDict-Words";
 const DEFAULT_NOTE_TYPE_NAME = "BasicCamCard";
 const DEFAULT_CSS_FILENAME = "common.css";
+const DEFAULT_APKG_NAME = DEFAULT_DECK_NAME + ".apkg";
 
 const cssData = fs.readFileSync(HTML_DIR + DEFAULT_CSS_FILENAME, "utf8");
 
@@ -40,7 +41,7 @@ async function processHtmlFilesNew() {
         resolve(files);
       });
     });
-
+    let cnt = 0;
     function addNote(file) {
       return new Promise((resolve, reject) => {
         if (path.extname(file) === ".html") {
@@ -76,9 +77,10 @@ async function processHtmlFilesNew() {
                     tagResult
                   )
                 );
-                resolve(data);
+                console.log(`[INFO] ${++cnt}/${files.length} CURRENT WORD: ${file.match(/^(.+)\.html$/)[1]}`);
+                resolve();
               } catch (err) {
-                writeToLog(`[ERR] Error processing ${file}: ${err.message}`);
+                writeToLog(`[ERR] ERROR PROCESSSING ${file}: ${err.message}`);
                 reject(err);
               }
             }
@@ -88,19 +90,17 @@ async function processHtmlFilesNew() {
         }
       });
     }
-
     const result = await Promise.allSettled(files.map(addNote));
-    console.log(`addNotes() result: ${JSON.stringify(result)}`);
+    console.log(`[INFO] addNotes() result: ${JSON.stringify(result)}`);
   } catch (err) {
-    console.error(err);
+    writeToLog(`[ERR] UNKNONW ERROR ${err}`);
   }
 }
-
 
 async function convert() {
   await processHtmlFilesNew();
   package.addDeck(deck);
-  package.writeToFile("IACG.apkg");
+  package.writeToFile(DEFAULT_APKG_NAME);
 }
 
 convert();
