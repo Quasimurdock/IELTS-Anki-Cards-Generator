@@ -25,12 +25,26 @@ If u just wanna use the note cards of IELTS words, follow the steps below:
 
 ### Develop
 
-1. Install `npm` or `pnpm`.
+There're actually two ways of generating notes to ur Anki program: 
+- `pnpm note` for converting HTML files and directly importing notes to ur Anki program.
+- `pnpm note-mkanki` is what we **HIGHLY RECOMMEND** for converting HTML files into `apkg`.
+
+#### For `pnpm note`: 
+
+1. Install `npm` or `pnpm`, here we recommend `pnpm`.
 2. `npm install` or `pnpm install` to pull all dependencies.
-3. `pnpm start` to generate html files from Cam dict.
+3. `pnpm start` to generate HTML files from Cam dict.
 4. Open ur Anki program.
-4. Install the Anki plugin [AnkiConnect](https://ankiweb.net/shared/info/2055492159).
-5. `pnpm note` to convert html files to notes in your Anki.
+5. Install the Anki plugin [AnkiConnect](https://ankiweb.net/shared/info/2055492159).
+6. `pnpm note` to convert html files to notes in your Anki.
+
+#### For `pnpm note-mkanki`: 
+
+1. Install `npm` or `pnpm`, here we recommend `pnpm`.
+2. `npm install` or `pnpm install` to pull all dependencies.
+3. `pnpm start` to generate HTML files from Cam dict.
+4. `pnpm note-mkanki` to generate `apkg` file from HTML files
+5. import output `apkg` file to ur Anki program manually.
 
 ## Template
 
