@@ -49,6 +49,8 @@ There're actually two ways of generating notes to ur Anki program:
 4. `pnpm note-mkanki` to generate `apkg` file from HTML files
 5. import output `apkg` file to ur Anki program manually.
 
+Note: If you encounter `node-gyp` relevant errors during the installation of `mkanki`, you could set up your environment according to this [doc](https://github.com/nodejs/node-gyp#installation), then try to install again.
+
 ## Template
 
 Check the `HTML` files under `output` directory once generation process completed.
