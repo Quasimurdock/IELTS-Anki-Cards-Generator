@@ -63,7 +63,7 @@ The dictionary data used in this project is sourced from a publicly available on
 
 If u have any questions, just open an issue of this repo or simply mail to my [outlook](mailto:sh1wnt@outlook.com). And... Don't forget to leave a star if u like it.
 
-# License
+## License
 
 ### [IELTS-Anki-Cards-Generator](https://github.com/Quasimurdock/IELTS-Anki-Cards-Generator)
 [GNU Affero General Public License v3](https://opensource.org/licenses/AGPL-3.0)
