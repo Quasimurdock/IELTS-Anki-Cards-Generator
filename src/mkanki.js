@@ -45,6 +45,7 @@ async function processHtmlFilesNew() {
     function addNote(file) {
       return new Promise((resolve, reject) => {
         if (path.extname(file) === ".html") {
+          const currentWord = file.match(/^(.+)\.html$/)[1];
           const filePath = path.join(HTML_DIR, file);
           fs.readFile(filePath, "utf8", (err, data) => {
             if (err) {
@@ -60,6 +61,11 @@ async function processHtmlFilesNew() {
                     front += $(ele).html() + "<hr color='grey'>";
                   });
                 const back = $("body").html();
+                if (!front || !back) {
+                  throw new Error(
+                    "EMPTY RESULT OF EXTRACTING FRONT OR BACK NOTES"
+                  );
+                }
                 const tags = $(".def-info.ddef-info")
                   .toArray()
                   .map((ele) =>
@@ -71,13 +77,12 @@ async function processHtmlFilesNew() {
                   const tagsDictinct = [...new Set(tags)].sort();
                   tagResult = tagsDictinct;
                 }
-                deck.addNote(
-                  model.note(
-                    [file.match(/^(.+)\.html$/)[1], front, back],
-                    tagResult
-                  )
+                deck.addNote(model.note([currentWord, front, back], tagResult));
+                console.log(
+                  `[INFO] ${++cnt}/${
+                    files.length - 1
+                  } CURRENT WORD: ${currentWord}`
                 );
-                console.log(`[INFO] ${++cnt}/${files.length} CURRENT WORD: ${file.match(/^(.+)\.html$/)[1]}`);
                 resolve();
               } catch (err) {
                 writeToLog(`[ERR] ERROR PROCESSSING ${file}: ${err.message}`);
@@ -91,9 +96,15 @@ async function processHtmlFilesNew() {
       });
     }
     const result = await Promise.allSettled(files.map(addNote));
-    console.log(`[INFO] addNotes() result: ${JSON.stringify(result)}`);
+    result.forEach((e, i) => {
+      if (e.status === "rejected") {
+        writeToLog(
+          `[ERR] ADD ${files[i].match(/^(.+)\.html$/)[1]} FAILED: ${e.reason}`
+        );
+      }
+    });
   } catch (err) {
-    writeToLog(`[ERR] UNKNONW ERROR ${err}`);
+    writeToLog(`[ERR] UNKNONW ERROR ${err.message}`);
   }
 }
 
