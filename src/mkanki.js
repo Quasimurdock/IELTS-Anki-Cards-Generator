@@ -95,14 +95,7 @@ async function processHtmlFilesNew() {
         }
       });
     }
-    const result = await Promise.allSettled(files.map(addNote));
-    result.forEach((e, i) => {
-      if (e.status === "rejected") {
-        writeToLog(
-          `[ERR] ADD ${files[i].match(/^(.+)\.html$/)[1]} FAILED: ${e.reason}`
-        );
-      }
-    });
+    await Promise.allSettled(files.map(addNote));
   } catch (err) {
     writeToLog(`[ERR] UNKNONW ERROR ${err.message}`);
   }
