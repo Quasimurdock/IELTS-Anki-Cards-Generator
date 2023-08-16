@@ -9,9 +9,11 @@ All words in `words.txt` comes from the [IELTS](https://github.com/Quasimurdock/
 ## Sample
 
 ### Front side
+
 ![front](./img/front.jpg)
 
 ### Back side
+
 ![back](./img/back.jpg)
 
 ## How to use
@@ -25,11 +27,12 @@ If u just wanna use the note cards of IELTS words, follow the steps below:
 
 ### Develop
 
-There're actually two ways of generating notes to ur Anki program: 
+There're actually two ways of generating notes to ur Anki program:
+
 - `pnpm note` for converting HTML files and directly importing notes to ur Anki program.
 - `pnpm note-mkanki` is what we **HIGHLY RECOMMEND** for converting HTML files into `apkg`.
 
-#### For `pnpm note`: 
+#### For `pnpm note`:
 
 1. Install `npm` or `pnpm`, here we recommend `pnpm`.
 2. `npm install` or `pnpm install` to pull all dependencies.
@@ -38,7 +41,7 @@ There're actually two ways of generating notes to ur Anki program:
 5. Install the Anki plugin [AnkiConnect](https://ankiweb.net/shared/info/2055492159).
 6. `pnpm note` to convert html files to notes in your Anki.
 
-#### For `pnpm note-mkanki`: 
+#### For `pnpm note-mkanki`:
 
 1. Install `npm` or `pnpm`, here we recommend `pnpm`.
 2. `npm install` or `pnpm install` to pull all dependencies.
@@ -57,4 +60,15 @@ The dictionary data used in this project is sourced from a publicly available on
 **This project is not intended for commercial use, and I will not be held responsible for any infringement of commercial rights that may arise from the use of this data.** Users of this project are solely responsible for their own use of the data and should ensure that they comply with all applicable laws and regulations.
 
 ## Contact
+
 If u have any questions, just open an issue of this repo or simply mail to my [outlook](mailto:sh1wnt@outlook.com). And... Don't forget to leave a star if u like it.
+
+# License
+
+### [IELTS-Anki-Cards-Generator](https://github.com/Quasimurdock/IELTS-Anki-Cards-Generator)
+[GNU Affero General Public License v3](https://opensource.org/licenses/AGPL-3.0)
+<br>Copyright (c) 2023 Quasimurdock
+
+## Other Third Party Licenses
+
+[License.md](https://github.com/Quasimurdock/IELTS-Anki-Cards-Generator/blob/mkanki-dev/License.md)
