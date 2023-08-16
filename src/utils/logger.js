@@ -36,7 +36,7 @@ function writeToLog(message) {
       const successInfo = logFormatter(
         "INFO",
         logTime,
-        "DIR LOG CREATED",
+        "LOG DIR CREATED",
         callerName
       );
       console.log(successInfo);
