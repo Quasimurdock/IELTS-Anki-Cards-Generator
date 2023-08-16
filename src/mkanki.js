@@ -72,7 +72,7 @@ async function processHtmlFilesNew() {
                     $(ele).find("span[class*='epp-xref dxref']").html()
                   )
                   .filter((ele) => ele !== null);
-                let tagResult = null;
+                let tagResult = [];
                 if (tags.length != 0) {
                   const tagsDictinct = [...new Set(tags)].sort();
                   tagResult = tagsDictinct;
