@@ -5,10 +5,12 @@ const path = require("path");
 const { Worker, isMainThread, workerData } = require("worker_threads");
 const writeToLog = require("./utils/logger");
 const DEFAULT_WORKER_NUM = 8;
+const fetchAudios = require("./utils/audio_downloader");
 
 // define directory path and file path
 const directoryPath = __dirname;
-const filePath = path.join(__dirname, "words.txt");
+const DEFAULT_WORDLIST_PATH = path.join(__dirname, "words.txt");
+const DEFAULT_HTML_DIR = `${directoryPath}/output/html/`;
 
 // define URL prefix
 const urlString =
@@ -40,6 +42,9 @@ async function processWord(word) {
 		const get = bent(urlString, "GET", "string", 200);
 		const data = await get(`/` + word);
 		const $ = cheerio.load(data);
+		let audioDIVsBuffer = [];
+		fetchAudios($, word, audioDIVsBuffer);
+		const audioDIVsString = audioDIVsBuffer.join("");
 		// remove unusable icon and hint nodes
 		$(".daud").remove();
 		$(".i.i-caret-right.dtrans.fs18.lpb-4").remove();
@@ -52,17 +57,20 @@ async function processWord(word) {
 		$("a[href*='dictionary'] span").removeClass("dx-h");
 		$("a[href*='dictionary']").removeAttr("href");
 		const target =
-			`<html><head><link rel="stylesheet" href="common.css"></head>` +
+			`<html><head><link rel="stylesheet" href="common.css"></head><body>` +
 			$(".entry-body").html() +
-			`</html>`;
+			"<div class='audioGroup'>" +
+			audioDIVsString +
+			"</div></body></html>";
 		fs.writeFile(
-			`${directoryPath}/output/html/${word}.html`,
+			`${DEFAULT_HTML_DIR}${word}.html`,
 			target,
 			(err) => {
 				if (err) {
-					console.log(`[ERR] While writing [${word}]:`, err);
-				} else {
-					console.log(`[OK] Word [${word}] is written.`);
+					writeToLog(
+						`[ERR] WHILE WRITING [${word}]: ${err.message}`
+					);
+					writeToLog(`[OK] WORD [${word}] WRITTEN.`);
 				}
 			}
 		);
@@ -73,9 +81,8 @@ async function processWord(word) {
 			word + "\n",
 			(err) => {
 				if (err) {
-					console.error(
-						`[LOG-ERR] WHILE LOGGING MISSING OF [${word}]:`,
-						err.message
+					writeToLog(
+						`[LOG-ERR] WHILE LOGGING MISSING of [${word}]:${err.message}`
 					);
 				}
 			}
@@ -86,7 +93,7 @@ async function processWord(word) {
 async function workerExecution() {
 	if (isMainThread) {
 		// read file and process the token of each line
-		fs.readFile(filePath, "utf8", async (err, data) => {
+		fs.readFile(DEFAULT_WORDLIST_PATH, "utf8", async (err, data) => {
 			if (err) {
 				writeToLog(`[ERR] ERROR READING FILE : ${err.message}`);
 				return;
@@ -110,7 +117,7 @@ async function workerExecution() {
 				});
 
 				worker.on("exit", () => {
-					writeToLog(`[INF] WORKER-${i} EXIT.`);
+					writeToLog(`[INFO] WORKER-${i} EXIT.`);
 				});
 
 				workers.push(worker);
@@ -122,7 +129,7 @@ async function workerExecution() {
 					worker.on("error", reject);
 				});
 			}
-			writeToLog("[INF] ALL WORKERS FINISHED.");
+			writeToLog("[INFO] ALL WORKERS FINISHED.");
 		});
 	} else {
 		const words = workerData;
