@@ -1,4 +1,4 @@
-# IELTS-Dict-Cards-Metadata-Generator
+# Camb-Dict-Anki-Cards-Generator
 
 ## Intro
 
@@ -56,6 +56,31 @@ Note: If you encounter `node-gyp` relevant errors during the installation of `mk
 ## Template
 
 Check the `HTML` files under `output` directory once generation process completed.
+
+## Customize
+
+### Words list
+
+It's obvious that the functionality of this repo is not specific to IELTS words. More precisely, this project is an **Anki cards generator for [Cambridge Dictionary](https://dictionary.cambridge.org/)**. It's easy for u to replace the `words.txt` with ur own word list.
+
+### Dictionaries
+
+Default dictionary is bilingual `English-Chinese(Simplified)`, u can also modify it to ur target dictionary version by changing the variable `urlString` in file `main.js` or `main-worker.js` depending on which operation u wanna use. U can get it from cambridge dictionary official website.
+
+There're quite a lot to choose from:
+
+* **English–Chinese (Simplified)**
+* **English–Chinese (Traditional)**
+* **English–Dutch**
+* **English–French**
+* **English–German**
+* **English–Indonesian**
+* **English–Italian**
+* **English–Japanese**
+* **English–Norwegian**
+* **English–Polish**
+* **English–Portuguese**
+* **English–Spanish**
 
 ## Contribute
 
