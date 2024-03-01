@@ -27,8 +27,10 @@ If u just wanna use the note cards of IELTS words, follow the steps below:
 
 ### Develop
 
-There're actually two ways of generating notes to ur Anki program:
+There're actually two ways of fetching HTML files and two ways of generating notes to ur Anki program:
 
+- `pnpm start` for fetching HTML files synchronously.
+- `pnpm start-worker` for fetching HTML files asynchronously through workers.
 - `pnpm note` for converting HTML files and directly importing notes to ur Anki program.
 - `pnpm note-mkanki` is what we **HIGHLY RECOMMEND** for converting HTML files into `apkg`.
 
@@ -45,11 +47,11 @@ There're actually two ways of generating notes to ur Anki program:
 
 1. Install `npm` or `pnpm`, here we recommend `pnpm`.
 2. `npm install` or `pnpm install` to pull all dependencies.
-3. `pnpm start` to generate HTML files from Camb dict.
+3. `pnpm start `or `pnpm start-worker` to generate HTML files from Camb dict.
 4. `pnpm note-mkanki` to generate `apkg` file from HTML files
 5. import output `apkg` file to ur Anki program manually.
 
-Note: If you encounter `node-gyp` relevant errors during the installation of `mkanki`, you could set up your environment according to this [doc](https://github.com/nodejs/node-gyp#installation), then try to install again.
+Note: If you encounter `node-gyp` relevant errors during the installation of `mkanki`, you could set up your environment according to this [doc](https://github.com/nodejs/node-gyp#installation), then try to install again. (and make sure u've installed Python3)
 
 ## Template
 
@@ -76,7 +78,8 @@ If u have any questions, just open an issue of this repo or simply mail to my [o
 ### [IELTS-Anki-Cards-Generator](https://github.com/Quasimurdock/IELTS-Anki-Cards-Generator)
 
 [GNU Affero General Public License v3](https://opensource.org/licenses/AGPL-3.0)
-`<br>`Copyright (c) 2023 Quasimurdock
+
+Copyright (c) 2023 Quasimurdock
 
 ## Other Third Party Licenses
 
