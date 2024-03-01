@@ -2,7 +2,7 @@
 
 ## Intro
 
-It's a simple online dictionary words fetching project for generating IELTS **anki cards**. It contains two main script `main.js` for fetching html and `html2notes.js` for converting html to notes in anki.
+It's a simple online dictionary words fetching project for generating IELTS **anki cards**. It contains four main script `main.js` /` main-worker.js`  for fetching html,  `html2notes.js` for converting html to notes in anki and `mkanki.js` for generating apkg from html files.
 
 All words in `words.txt` comes from the [IELTS](https://github.com/Quasimurdock/IELTS) repo.
 
@@ -22,8 +22,8 @@ All words in `words.txt` comes from the [IELTS](https://github.com/Quasimurdock/
 
 If u just wanna use the note cards of IELTS words, follow the steps below:
 
-1. Find the release package in the **right nav bar** of this page and download it.
-2. Import the `.apkg` file inside that package to Anki.
+1. Find the release in the **right nav bar** of this page and download it.
+2. Import the `.apkg` file to ur Anki program, that's it.
 
 ### Develop
 
@@ -36,7 +36,7 @@ There're actually two ways of generating notes to ur Anki program:
 
 1. Install `npm` or `pnpm`, here we recommend `pnpm`.
 2. `npm install` or `pnpm install` to pull all dependencies.
-3. `pnpm start` to generate HTML files from Cam dict.
+3. `pnpm start` or `pnpm start-worker` to generate HTML files from Camb dict.
 4. Open ur Anki program.
 5. Install the Anki plugin [AnkiConnect](https://ankiweb.net/shared/info/2055492159).
 6. `pnpm note` to convert html files to notes in your Anki.
@@ -45,7 +45,7 @@ There're actually two ways of generating notes to ur Anki program:
 
 1. Install `npm` or `pnpm`, here we recommend `pnpm`.
 2. `npm install` or `pnpm install` to pull all dependencies.
-3. `pnpm start` to generate HTML files from Cam dict.
+3. `pnpm start` to generate HTML files from Camb dict.
 4. `pnpm note-mkanki` to generate `apkg` file from HTML files
 5. import output `apkg` file to ur Anki program manually.
 
@@ -54,6 +54,12 @@ Note: If you encounter `node-gyp` relevant errors during the installation of `mk
 ## Template
 
 Check the `HTML` files under `output` directory once generation process completed.
+
+## Contribute
+
+Glory to [Serifold](https://github.com/Serifold), who really did a great job in helping make this proj better.
+
+If u also wanna contribute to this repo, just make a new fork or open a new issue to let me know.
 
 ## Disclaimer
 
@@ -68,8 +74,9 @@ If u have any questions, just open an issue of this repo or simply mail to my [o
 ## License
 
 ### [IELTS-Anki-Cards-Generator](https://github.com/Quasimurdock/IELTS-Anki-Cards-Generator)
+
 [GNU Affero General Public License v3](https://opensource.org/licenses/AGPL-3.0)
-<br>Copyright (c) 2023 Quasimurdock
+`<br>`Copyright (c) 2023 Quasimurdock
 
 ## Other Third Party Licenses
 
