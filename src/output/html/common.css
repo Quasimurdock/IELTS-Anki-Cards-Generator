@@ -2,6 +2,10 @@
 	padding-left:10px;
 }
 
+.sound{
+    display: none;
+}
+
 img,
 legend {
     border: 0

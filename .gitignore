@@ -1,3 +1,4 @@
 node_modules/
 src/output/html/*.html
 src/output/log/
+src/output/audios/
