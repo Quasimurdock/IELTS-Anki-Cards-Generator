@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/main.js",
+    "start-worker":"node src/main-worker.js",
     "note": "node src/html2notes.js",
     "note-mkanki": "node src/mkanki.js"
   },
@@ -23,6 +24,6 @@
   "dependencies": {
     "bent": "^7.3.12",
     "cheerio": "1.0.0-rc.12",
-    "mkanki": "github:Serifold/mkanki"
+    "mkanki": "github:Serifold/mkanki#add-tag"
   }
 }
